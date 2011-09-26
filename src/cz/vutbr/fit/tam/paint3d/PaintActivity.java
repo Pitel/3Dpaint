@@ -1,4 +1,4 @@
-package cz.vutbr.fit.tam.paint;
+package cz.vutbr.fit.tam.paint3d;
 
 import android.app.Activity;
 import android.os.Bundle;
