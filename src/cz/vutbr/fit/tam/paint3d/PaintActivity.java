@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class PaintActivity extends Activity
 {
+    public static final String TAG = "3Dpaint|PaintActivity";
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
