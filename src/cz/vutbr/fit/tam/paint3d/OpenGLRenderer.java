@@ -29,6 +29,7 @@ public class OpenGLRenderer implements Renderer {
 		GLES11.glEnableClientState(GLES11.GL_VERTEX_ARRAY);
 	}
 	
+	@Override
 	public void onDrawFrame(GL10 gl) {
 		GLES11.glClear(GLES11.GL_COLOR_BUFFER_BIT | GLES11.GL_DEPTH_BUFFER_BIT);
 		
@@ -43,6 +44,7 @@ public class OpenGLRenderer implements Renderer {
 		GLES11.glDrawArrays(GLES11.GL_TRIANGLES, 0, 3);
 	}
 	
+	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
 		GLES11.glViewport(0, 0, width, height);
 		
