@@ -19,4 +19,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/magnetic"
         />
+    <Button android:id="@+id/oglbutton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="OpenGL" android:onClick="opengl" />
 </LinearLayout>

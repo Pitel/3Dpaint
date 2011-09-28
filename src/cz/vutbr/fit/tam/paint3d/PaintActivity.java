@@ -1,12 +1,14 @@
 package cz.vutbr.fit.tam.paint3d;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class PaintActivity extends Activity implements SensorEventListener
@@ -67,4 +69,8 @@ public class PaintActivity extends Activity implements SensorEventListener
         mSensorManager.unregisterListener(this);
         super.onStop();
     }
+
+	public void opengl(View view) {
+		startActivity(new Intent(this, ViewActivity.class));
+	}
 }
