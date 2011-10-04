@@ -1,5 +1,5 @@
-3Dpaint – kreslení mobilem v prosotu
-====================================
+3Dpaint – kreslení mobilem v prostoru
+=====================================
 Projekt do předmětu Tvorba aplikací pro mobilní zařízení.
 
 Autoři
