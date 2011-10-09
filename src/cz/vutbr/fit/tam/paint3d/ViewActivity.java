@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 
 public class ViewActivity extends Activity {
-	private GLSurfaceView view;
+	private TouchGLSurfaceView view;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		view = new TouchGLSurfaceView(this);
+		view.renderer.vertices = getIntent().getFloatArrayExtra("vertices");
 		setContentView(view);
 	}
 	

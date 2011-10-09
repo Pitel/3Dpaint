@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import java.util.Random;
 
 public class PaintActivity extends Activity implements SensorEventListener
 {
@@ -71,6 +72,14 @@ public class PaintActivity extends Activity implements SensorEventListener
     }
 
 	public void opengl(View view) {
-		startActivity(new Intent(this, ViewActivity.class));
+		final Intent intent = new Intent(this, ViewActivity.class);
+		final Random random = new Random();
+		final byte points = 10;
+		float vertices[] = new float[points * 3];
+		for (byte i = 0; i < points * 3; i++) {
+			vertices[i] = random.nextFloat() * 2 - 1;
+		}
+		intent.putExtra("vertices", vertices);
+		startActivity(intent);
 	}
 }
