@@ -47,15 +47,8 @@ public class ViewActivity extends Activity {
 			float y = e.getY();
 			
 			if (e.getAction() == MotionEvent.ACTION_MOVE) {
-				float dx = x - prevX;
-				float dy = y - prevY;
-				if (y > getHeight() / 2) {
-					dx = dx * -1 ;
-				}
-				if (x < getWidth() / 2) {
-					dy = dy * -1 ;
-				}
-				renderer.angle += (dx + dy) * (180f / 320f);
+				renderer.angleX += (x - prevX) / 2;
+				renderer.angleY += (y - prevY) / 2;
 				requestRender();
 			}
 			prevX = x;
