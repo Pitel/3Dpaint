@@ -8,7 +8,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements Renderer {
-	public float angle;
+	public float angleX, angleY;
 	public float vertices[];
 	private FloatBuffer trail;
 	
@@ -33,7 +33,19 @@ public class OpenGLRenderer implements Renderer {
 		GLES11.glLoadIdentity();
 		GLU.gluLookAt(gl, 0, 0, -5, 0, 0, 0, 0, 1, 0);
 		
-		GLES11.glRotatef(angle, 0, 0, 1);
+		if (angleY < -90) {
+			angleY = -90;
+		} else if (angleY > 90) {
+			angleY = 90;
+		}
+		GLES11.glRotatef(-angleY, 1, 0, 0);
+		
+		if (angleX > 360) {
+			angleX -= 360;
+		} else if (angleX < 0) {
+			angleX += 360;
+		}
+		GLES11.glRotatef(angleX, 0, 1, 0);
 		
 		GLES11.glColor4f(1, 1, 1, 1);
 		GLES11.glVertexPointer(3, GLES11.GL_FLOAT, 0, trail);
