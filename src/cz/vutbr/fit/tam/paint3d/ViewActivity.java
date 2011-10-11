@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 
 public class ViewActivity extends Activity {
+        public static final String TAG = "3Dpaint|ViewActivity";
+
 	private TouchGLSurfaceView view;
 	
 	@Override
