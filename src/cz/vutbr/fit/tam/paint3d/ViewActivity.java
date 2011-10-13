@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 
 public class ViewActivity extends Activity {
-        public static final String TAG = "3Dpaint|ViewActivity";
-
+	public static final String TAG = "3Dpaint|ViewActivity";
+	
 	private TouchGLSurfaceView view;
 	
 	@Override
@@ -45,16 +45,15 @@ public class ViewActivity extends Activity {
 		
 		@Override
 		public boolean onTouchEvent(MotionEvent e) {
-			float x = e.getX();
-			float y = e.getY();
-			
 			if (e.getAction() == MotionEvent.ACTION_MOVE) {
+				float x = e.getX();
+				float y = e.getY();
 				renderer.angleX += (x - prevX) / 2;
 				renderer.angleY += (y - prevY) / 2;
 				requestRender();
+				prevX = x;
+				prevY = y;
 			}
-			prevX = x;
-			prevY = y;
 			return true;
 		}
 	}

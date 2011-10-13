@@ -3,14 +3,18 @@ package cz.vutbr.fit.tam.paint3d;
 import android.opengl.GLES11;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
+import android.util.Log;
+import java.lang.Math;
 import java.nio.*;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements Renderer {
+	public static final String TAG = "3Dpaint|GL";
 	public float angleX, angleY;
 	public float vertices[];
 	private FloatBuffer trail;
+	private float max = 0;
 	
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -22,17 +26,24 @@ public class OpenGLRenderer implements Renderer {
 		trail.put(vertices);
 		trail.position(0);
 		
+		for (float v : vertices) {
+			max = Math.max(max, v);
+		}
+		max *= 2;
+		Log.d(TAG, "Max: " + max);
+		
 		GLES11.glEnableClientState(GLES11.GL_VERTEX_ARRAY);
 	}
 	
 	@Override
 	public void onDrawFrame(GL10 gl) {
-		GLES11.glClear(GLES11.GL_COLOR_BUFFER_BIT | GLES11.GL_DEPTH_BUFFER_BIT);
+		GLES11.glClear(GLES11.GL_COLOR_BUFFER_BIT);
 		
 		GLES11.glMatrixMode(GLES11.GL_MODELVIEW);
 		GLES11.glLoadIdentity();
-		GLU.gluLookAt(gl, 0, 0, -5, 0, 0, 0, 0, 1, 0);
+		GLU.gluLookAt(gl, 0, 0, -max , 0, 0, 0, 0, 1, 0);
 		
+		//TODO modulo
 		if (angleY < -90) {
 			angleY = -90;
 		} else if (angleY > 90) {
