@@ -29,8 +29,8 @@ public class OpenGLRenderer implements Renderer {
 		for (float v : vertices) {
 			max = Math.max(max, v);
 		}
-		max *= 2;
 		Log.d(TAG, "Max: " + max);
+		max *= 2;
 		
 		GLES11.glEnableClientState(GLES11.GL_VERTEX_ARRAY);
 	}
@@ -43,7 +43,6 @@ public class OpenGLRenderer implements Renderer {
 		GLES11.glLoadIdentity();
 		GLU.gluLookAt(gl, 0, 0, -max , 0, 0, 0, 0, 1, 0);
 		
-		//TODO modulo
 		if (angleY < -90) {
 			angleY = -90;
 		} else if (angleY > 90) {
