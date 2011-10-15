@@ -69,6 +69,6 @@ public class OpenGLRenderer implements Renderer {
 		float ratio = (float) width / height;
 		GLES11.glMatrixMode(GLES11.GL_PROJECTION);
 		GLES11.glLoadIdentity();
-		GLU.gluPerspective(gl, 60, (float) width / (float) height, 0.1f, 10);
+		GLU.gluPerspective(gl, 60, (float) width / (float) height, 0.1f, max * 2);
 	}
 }

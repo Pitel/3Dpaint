@@ -84,6 +84,12 @@ public class PaintActivity extends Activity implements SensorEventListener {
     }
 
     @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(this);
+        super.onPause();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this,

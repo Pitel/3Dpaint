@@ -45,15 +45,15 @@ public class ViewActivity extends Activity {
 		
 		@Override
 		public boolean onTouchEvent(MotionEvent e) {
+			float x = e.getX();
+			float y = e.getY();
 			if (e.getAction() == MotionEvent.ACTION_MOVE) {
-				float x = e.getX();
-				float y = e.getY();
 				renderer.angleX += (x - prevX) / 2;
 				renderer.angleY += (y - prevY) / 2;
 				requestRender();
-				prevX = x;
-				prevY = y;
 			}
+			prevX = x;
+			prevY = y;
 			return true;
 		}
 	}
