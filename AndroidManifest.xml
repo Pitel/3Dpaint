@@ -4,7 +4,7 @@
 	<uses-feature android:name="android.hardware.sensor.accelerometer" />
 	<uses-feature android:name="android.hardware.sensor.compass" />
 	<application android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" android:icon="@drawable/ic_launcher_3dpaint">
-		<activity android:name=".PaintActivity" android:screenOrientation="behind">
+		<activity android:name=".PaintActivity" android:screenOrientation="nosensor">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
