@@ -7,17 +7,12 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/accelerometer"
+        android:id="@+id/position"
         />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/orientation"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/magnetic"
+        android:id="@+id/linear"
         />
     <Button 
         android:id="@+id/button"

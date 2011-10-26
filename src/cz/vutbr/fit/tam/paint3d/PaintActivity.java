@@ -15,29 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaintActivity extends Activity implements SensorEventListener {
-    public static final String TAG = "3Dpaint|PaintActivity";
 
+    public static final String TAG = "3Dpaint|PaintActivity";
     private SensorManager mSensorManager;
-    private TextView accelerometer;
-    private TextView orientation;
-    private TextView magnetic;
+    private TextView position;
+    private TextView linear;
     private Button button;
     private Boolean isMeasuring = false;
     private List<Float> vertices = new ArrayList<Float>();
+    private Float x = new Float(0);
+    private Float y = new Float(0);
+    private Float z = new Float(0);
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = (TextView) findViewById(R.id.accelerometer);
-        orientation = (TextView) findViewById(R.id.orientation);
-        magnetic = (TextView) findViewById(R.id.magnetic);
+        position = (TextView) findViewById(R.id.position);
         button = (Button) findViewById(R.id.button);
-
+        linear = (TextView) findViewById(R.id.linear);
 
         button.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
                 if (isMeasuring) {
                     isMeasuring = false;
@@ -52,6 +52,9 @@ public class PaintActivity extends Activity implements SensorEventListener {
                 } else {
                     isMeasuring = true;
                     vertices = new ArrayList<Float>();
+                    x = new Float(0);
+                    y = new Float(0);
+                    z = new Float(0);
                     button.setText("Stop 3D paint!");
                 }
             }
@@ -60,23 +63,20 @@ public class PaintActivity extends Activity implements SensorEventListener {
 
     public void onSensorChanged(SensorEvent event) {
         switch (event.sensor.getType()) {
-            case Sensor.TYPE_ACCELEROMETER:
+            case Sensor.TYPE_LINEAR_ACCELERATION:
                 if (isMeasuring) {
-                    vertices.add(event.values[0]);
-                    vertices.add(event.values[1]);
-                    vertices.add(event.values[2]);
+                    x += Math.round(event.values[0] * 100) / 100;
+                    vertices.add(x);
+                    y += Math.round(event.values[1] * 100) / 100;
+                    vertices.add(y);
+                    z += Math.round(event.values[2] * 100) / 100;
+                    vertices.add(z);
                 }
-                accelerometer.setText("\nAccelerometer:\nx: " + event.values[0] + "\ny: " + event.values[1] + "\nz: " + event.values[2] + "\n\nPoints: " + vertices.size());
-            break;
-            case Sensor.TYPE_MAGNETIC_FIELD:
-                magnetic.setText("\nMagnetic Field:\nx: " + event.values[0] + "\ny: " + event.values[1] + "\nz: " + event.values[2] + "\n");
-            break;
-            case Sensor.TYPE_ORIENTATION:
-                orientation.setText("\nOrientation:\nx: " + event.values[0] + "\ny: " + event.values[1] + "\nz: " + event.values[2] + "\n");
-            break;
+                linear.setText("\nLinear:\nx: " + event.values[0] + "\ny: " + event.values[1] + "\nz: " + event.values[2] + "\n");
+                position.setText("\nPosition:\nx: " + x + "\ny: " + y + "\nz: " + z + "\n");
+                break;
             default:
-                Log.d(TAG, "Sensor: " + event.sensor.getName() + ", x: " + event.values[0] + ", y: " + event.values[1] + ", z: " + event.values[2]);
-            break;
+                break;
         }
     }
 
@@ -92,15 +92,7 @@ public class PaintActivity extends Activity implements SensorEventListener {
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this,
-                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_GAME);
-        mSensorManager.registerListener(this,
-                mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
-                SensorManager.SENSOR_DELAY_GAME);
-        mSensorManager.registerListener(this,
-                mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION), SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
