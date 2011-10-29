@@ -21,7 +21,6 @@ public class PaintActivity extends Activity implements SensorEventListener {
     private TextView position;
     private TextView linear;
     private ToggleButton button;
-    private Boolean isMeasuring = false;
     private List<Float> vertices = new ArrayList<Float>();
     private Float x = new Float(0);
     private Float y = new Float(0);
