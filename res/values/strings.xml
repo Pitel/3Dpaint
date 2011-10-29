@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">3Dpaint</string>
+	<string name="startpaint">Start painting!</string>
+	<string name="stoppaint">Stop painting!</string>
 </resources>
