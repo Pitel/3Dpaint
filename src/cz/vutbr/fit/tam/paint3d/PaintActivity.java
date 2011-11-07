@@ -18,8 +18,7 @@ public class PaintActivity extends Activity implements SensorEventListener {
 
     public static final String TAG = "3Dpaint|PaintActivity";
     private SensorManager mSensorManager;
-    private TextView position;
-    private TextView linear;
+    private TextView debug;
     private ToggleButton button;
     private List<Float> vertices = new ArrayList<Float>();
     private Float x = new Float(0);
@@ -31,14 +30,14 @@ public class PaintActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        position = (TextView) findViewById(R.id.position);
         button = (ToggleButton) findViewById(R.id.button);
-        linear = (TextView) findViewById(R.id.linear);
+        debug = (TextView) findViewById(R.id.debug);
 
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 if (button.isChecked()) {
+                    button.setBackgroundResource(R.drawable.click_to_stop_painting);
                     vertices = new ArrayList<Float>();
                     x = new Float(0);
                     y = new Float(0);
@@ -67,8 +66,7 @@ public class PaintActivity extends Activity implements SensorEventListener {
                     z += Math.round(event.values[2] * 100) / 100;
                     vertices.add(z);
                 }
-                linear.setText("\nLinear:\nx: " + event.values[0] + "\ny: " + event.values[1] + "\nz: " + event.values[2] + "\n");
-                position.setText("\nPosition:\nx: " + x + "\ny: " + y + "\nz: " + z + "\n");
+                debug.setText("x:" + x + " y:" + y + " z:" + z + " (" + vertices.size() + ")");
                 break;
             default:
                 break;
@@ -87,6 +85,7 @@ public class PaintActivity extends Activity implements SensorEventListener {
     @Override
     protected void onResume() {
         super.onResume();
+        button.setBackgroundResource(R.drawable.click_to_paint);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION), SensorManager.SENSOR_DELAY_GAME);
     }
 

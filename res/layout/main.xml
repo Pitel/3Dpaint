@@ -4,21 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/position"
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear"
-        />
-    <ToggleButton
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_height="fill_parent"
-        android:textOff="@string/startpaint"
-        android:textOn="@string/stoppaint"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        >
+        <ToggleButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/click_to_paint"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/debug"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textSize="12dip"
+        android:gravity="right"
+        android:padding="5dip"
+        android:textColor="#999999"
         />
 </LinearLayout>
