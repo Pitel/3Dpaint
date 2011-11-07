@@ -4,7 +4,6 @@ import android.opengl.GLES11;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 import android.util.Log;
-import java.lang.Math;
 import java.nio.*;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
