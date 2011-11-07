@@ -4,6 +4,9 @@ import android.content.Context;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 
 public class ViewActivity extends Activity {
@@ -29,6 +32,25 @@ public class ViewActivity extends Activity {
     protected void onResume() {
         super.onResume();
         view.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu_view, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.obj:
+                return true;
+            case R.id.collada:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     class TouchGLSurfaceView extends GLSurfaceView {
