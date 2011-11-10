@@ -11,27 +11,9 @@
         <View style="@style/action_bar_separator" />
         <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_add" android:onClick="goAdd"  />
     </LinearLayout>
-    <ListView
-        android:id="@android:id/list"
+    <cz.vutbr.fit.tam.paint3d.TouchGLSurfaceView
+        android:id="@+id/touch"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-    />
-    <TextView
-        android:id="@android:id/empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="No paintings!"
-        android:gravity="center"
-        android:textSize="15dip"
-        android:textColor="@color/just_white"
-    />
-    <TextView
-        android:id="@+id/debug"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:textSize="12dip"
-        android:gravity="right"
-        android:padding="5dip"
-        android:textColor="#FF999999"
         />
 </LinearLayout>

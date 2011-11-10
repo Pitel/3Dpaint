@@ -8,46 +8,45 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
 
-public class PaintActivity extends Activity implements SensorEventListener {
-
-    public static final String TAG = "3Dpaint|PaintActivity";
+public class AddActivity extends Activity implements SensorEventListener {
+    public ToggleButton button;
     private SensorManager mSensorManager;
-    private TextView debug;
-    private ToggleButton button;
-    private List<Float> vertices = new ArrayList<Float>();
+    private Painting painting;
+    private EditText name;
     private Float x = new Float(0);
     private Float y = new Float(0);
     private Float z = new Float(0);
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.add);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         button = (ToggleButton) findViewById(R.id.button);
-        debug = (TextView) findViewById(R.id.debug);
+        name = (EditText) findViewById(R.id.name);
 
+        
         button.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
+                if (name.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(AddActivity.this, "Vyplňte název kresby!", Toast.LENGTH_LONG).show();
+                    button.setChecked(false);
+                    return;
+                }
                 if (button.isChecked()) {
-                    button.setBackgroundResource(R.drawable.click_to_stop_painting);
-                    vertices = new ArrayList<Float>();
                     x = new Float(0);
                     y = new Float(0);
                     z = new Float(0);
+                    painting = new Painting(AddActivity.this);
                 } else {
-                    Intent intent = new Intent(PaintActivity.this, ViewActivity.class);
-                    float[] result = new float[vertices.size()];
-                    for (int i = 0; i < vertices.size(); i++) {
-                        result[i] = vertices.get(i).floatValue();
-                    }
-                    intent.putExtra("vertices", result);
+                    painting.name = name.getText().toString();
+                    painting.save();
+                    Intent intent = new Intent(AddActivity.this, DetailActivity.class);
+                    intent.putExtra("paintingId", painting.paintingId);
                     startActivity(intent);
                 }
             }
@@ -58,14 +57,15 @@ public class PaintActivity extends Activity implements SensorEventListener {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_LINEAR_ACCELERATION:
                 if (button.isChecked()) {
-                    x += Math.round(event.values[0] * 100) / 100;
-                    vertices.add(x);
-                    y += Math.round(event.values[1] * 100) / 100;
-                    vertices.add(y);
-                    z += Math.round(event.values[2] * 100) / 100;
-                    vertices.add(z);
+                    if (x != (Math.round(event.values[0] * 100) / 100) ||
+                        y != (Math.round(event.values[1] * 100) / 100) ||
+                        z != (Math.round(event.values[2] * 100) / 100)) {
+                            x += Math.round(event.values[0] * 100) / 100;
+                            y += Math.round(event.values[1] * 100) / 100;
+                            z += Math.round(event.values[2] * 100) / 100;
+                            this.painting.paintingPointList.add(new PaintingPoint(x, y, z));
+                    }
                 }
-                debug.setText("x:" + x + " y:" + y + " z:" + z + " (" + vertices.size() + ")");
                 break;
             default:
                 break;
@@ -84,7 +84,6 @@ public class PaintActivity extends Activity implements SensorEventListener {
     @Override
     protected void onResume() {
         super.onResume();
-        button.setBackgroundResource(R.drawable.click_to_paint);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION), SensorManager.SENSOR_DELAY_GAME);
     }
 
