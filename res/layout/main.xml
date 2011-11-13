@@ -25,13 +25,4 @@
         android:textSize="15dip"
         android:textColor="@color/just_white"
     />
-    <TextView
-        android:id="@+id/debug"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:textSize="12dip"
-        android:gravity="right"
-        android:padding="5dip"
-        android:textColor="#FF999999"
-        />
 </LinearLayout>
