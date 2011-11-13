@@ -15,5 +15,35 @@
         android:id="@+id/touch"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_weight="1"
         />
+    <LinearLayout style="@style/detail_footer">
+        <TextView
+            android:id="@+id/name"
+            style="@style/listitem_normal_text"
+            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/count"
+                style="@style/listitem_small_text"
+                android:paddingRight="3dip"
+                />
+            <TextView
+                android:text="@string/points"
+                style="@style/listitem_small_text"
+                />
+            <TextView
+                android:text=" | "
+                style="@style/listitem_small_text"
+                />
+            <TextView
+                style="@style/listitem_small_text"
+                android:id="@+id/created"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
