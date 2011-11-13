@@ -33,6 +33,7 @@
             android:lines="1"
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
+            android:paddingRight="3dip"
             />
         <TextView
             android:text="@string/points"
