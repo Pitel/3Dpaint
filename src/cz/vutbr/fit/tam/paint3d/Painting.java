@@ -4,18 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class Painting {
+
     public static final String TAG = "3Dpaint|Painting";
+    public static final String TABLE_NAME = "painting";
+    public static final String[] TABLE_COLUMNS = {"name", "created", "painting_id"};
     private Context context;
     public Integer paintingId;
     public String name;
     public String created;
     public PaintingPointSet paintingPointSet;
-
-    public static final String TABLE_NAME = "painting";
-    public static final String[] TABLE_COLUMNS = {"name", "created", "painting_id"};
 
     public Painting(Context context) {
         this.context = context;
@@ -29,18 +28,14 @@ public class Painting {
         this.created = c.getString(c.getColumnIndex("created"));
 
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-        Cursor points = db.query("painting_point", new String[]{"x", "y", "z", "painting_point_id", "painting_id"}, "painting_id = ?", new String[]{this.paintingId.toString()}, null, null, "painting_point_id");
-        Log.d("Painting", "count:" + c.getCount());
+        Cursor points = db.query(PaintingPoint.TABLE_NAME, PaintingPoint.TABLE_COLUMNS, "painting_id = ?", new String[]{this.paintingId.toString()}, null, null, "painting_point_id");
         if (points.getCount() > 0) {
-            while(points.moveToNext()) {
-                Log.d("Painting", "paintingPointId:" + points.getInt(points.getColumnIndex("painting_point_id")));
+            while (points.moveToNext()) {
                 this.paintingPointSet.add(
-                    new PaintingPoint(
+                        new PaintingPoint(
                         Float.valueOf(points.getFloat(points.getColumnIndex("x"))),
                         Float.valueOf(points.getFloat(points.getColumnIndex("y"))),
-                        Float.valueOf(points.getFloat(points.getColumnIndex("z")))
-                    )
-                );
+                        Float.valueOf(points.getFloat(points.getColumnIndex("z")))));
             }
         }
         points.close();
@@ -55,16 +50,16 @@ public class Painting {
             values = new ContentValues();
             values.put("name", this.name);
             values.put("created", this.created);
-            this.paintingId = (int) db.insert(this.TABLE_NAME, null, values);
+            this.paintingId = (int) db.insert(Painting.TABLE_NAME, null, values);
 
-            
+
             for (PaintingPoint pp : this.paintingPointSet) {
                 values = new ContentValues();
                 values.put("x", pp.x.floatValue());
                 values.put("y", pp.y.floatValue());
                 values.put("z", pp.z.floatValue());
                 values.put("painting_id", this.paintingId);
-                db.insert("painting_point", null, values);
+                db.insert(PaintingPoint.TABLE_NAME, null, values);
             }
         }
         db.close();
@@ -76,8 +71,8 @@ public class Painting {
         int i = 0;
         for (PaintingPoint pp : this.paintingPointSet) {
             result[i] = pp.x.floatValue();
-            result[i+1] = pp.y.floatValue();
-            result[i+2] = pp.z.floatValue();
+            result[i + 1] = pp.y.floatValue();
+            result[i + 2] = pp.z.floatValue();
             i = i + 3;
         }
         return result;
@@ -97,7 +92,7 @@ public class Painting {
 
     void delete() {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-        db.delete("painting", "painting_id = ?", new String[]{this.paintingId.toString()});
-        db.delete("painting_point", "painting_id = ?", new String[]{this.paintingId.toString()});
+        db.delete(Painting.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
+        db.delete(PaintingPoint.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
     }
 }
