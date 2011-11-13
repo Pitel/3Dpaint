@@ -3,4 +3,9 @@
 	<string name="app_name">3D Paint</string>
 	<string name="obj">Export do OBJ</string>
         <string name="collada">Export do Collada</string>
+
+        <string name="delete_confirm_msg">Opravdu chcete smazat tuto kresbu?</string>
+        <string name="delete_confirm_title">Smazaní kresby</string>
+        <string name="delete_confirm_yes">Ano</string>
+        <string name="delete_confirm_no">Ne</string>
 </resources>
