@@ -44,7 +44,7 @@ public class PaintingListAdapter extends BaseAdapter {
         }
 
         holder.name.setText(this.getItem(i).name);
-        holder.count.setText(String.valueOf(this.getItem(i).paintingPointList.size()));
+        holder.count.setText(String.valueOf(this.getItem(i).paintingPointSet.size()));
 
         return convertView;
     }

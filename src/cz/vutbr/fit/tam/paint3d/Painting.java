@@ -5,20 +5,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Painting {
     public static final String TAG = "3Dpaint|Painting";
     private Context context;
     public Integer paintingId;
     public String name;
-    public List<PaintingPoint> paintingPointList;
+    public PaintingPointSet paintingPointSet;
 
     public Painting(Context context) {
         this.context = context;
         this.paintingId = 0;
-        this.paintingPointList = new ArrayList<PaintingPoint>();
+        this.paintingPointSet = new PaintingPointSet();
     }
 
     public Painting loadFromCursor(Cursor c) {
@@ -31,7 +29,7 @@ public class Painting {
         if (points.getCount() > 0) {
             while(points.moveToNext()) {
                 Log.d("Painting", "paintingPointId:" + points.getInt(points.getColumnIndex("painting_point_id")));
-                this.paintingPointList.add(
+                this.paintingPointSet.add(
                     new PaintingPoint(
                         Float.valueOf(points.getFloat(points.getColumnIndex("x"))),
                         Float.valueOf(points.getFloat(points.getColumnIndex("y"))),
@@ -54,7 +52,7 @@ public class Painting {
             this.paintingId = (int) db.insert("painting", null, values);
 
             
-            for (PaintingPoint pp : this.paintingPointList) {
+            for (PaintingPoint pp : this.paintingPointSet) {
                 values = new ContentValues();
                 values.put("x", pp.x.floatValue());
                 values.put("y", pp.y.floatValue());
@@ -68,9 +66,9 @@ public class Painting {
     }
 
     float[] getVertices() {
-        float[] result = new float[this.paintingPointList.size() * 3];
+        float[] result = new float[this.paintingPointSet.size() * 3];
         int i = 0;
-        for (PaintingPoint pp : this.paintingPointList) {
+        for (PaintingPoint pp : this.paintingPointSet) {
             result[i] = pp.x.floatValue();
             result[i+1] = pp.y.floatValue();
             result[i+2] = pp.z.floatValue();
