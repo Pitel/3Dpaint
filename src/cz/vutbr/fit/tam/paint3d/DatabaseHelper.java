@@ -18,7 +18,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE painting ("
                 + "painting_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                + "name VARCHAR NOT NULL COLLATE LOCALIZED)");
+                + "name VARCHAR NOT NULL COLLATE LOCALIZED,"
+                + "created VARCHAR NOT NULL COLLATE LOCALIZED)");
         db.execSQL("CREATE TABLE painting_point ("
                 + "painting_point_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                 + "painting_id INTEGER NOT NULL,"

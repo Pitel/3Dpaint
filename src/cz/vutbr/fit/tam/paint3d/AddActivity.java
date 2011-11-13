@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class AddActivity extends Activity implements SensorEventListener {
 
@@ -47,6 +50,9 @@ public class AddActivity extends Activity implements SensorEventListener {
                     painting = new Painting(AddActivity.this);
                 } else {
                     painting.name = name.getText().toString();
+                    DateFormat dateFormat = new SimpleDateFormat("d. M. y H:mm:ss");
+                    Calendar cal = Calendar.getInstance();
+                    painting.created = dateFormat.format(cal.getTime());
                     painting.save();
                     Intent intent = new Intent(AddActivity.this, DetailActivity.class);
                     intent.putExtra("paintingId", painting.paintingId);

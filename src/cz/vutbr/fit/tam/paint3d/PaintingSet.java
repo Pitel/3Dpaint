@@ -17,7 +17,7 @@ public class PaintingSet extends ArrayList<Painting> {
     public PaintingSet getAll() {
         this.clear();
         SQLiteDatabase db = new DatabaseHelper(this.context).getWritableDatabase();
-        Cursor c = db.query("painting", new String[]{"name", "painting_id"}, null, null, null, null, "name");
+        Cursor c = db.query(Painting.TABLE_NAME, Painting.TABLE_COLUMNS, null, null, null, null, "name");
         if (c.getCount() > 0) {
             while (c.moveToNext()) {
                 Painting p = new Painting(this.context);

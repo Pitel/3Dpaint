@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="5dip"
+    android:padding="10dip"
     >
     <TextView
         android:id="@+id/name"
@@ -35,7 +35,29 @@
             android:scrollHorizontally="true"
             />
         <TextView
-            android:text=" bodů"
+            android:text="@string/points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/just_white"
+            android:textSize="14dip"
+            android:singleLine="true"
+            android:lines="1"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            />
+        <TextView
+            android:text=" | "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/just_white"
+            android:textSize="14dip"
+            android:singleLine="true"
+            android:lines="1"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            />
+        <TextView
+            android:id="@+id/created"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/just_white"

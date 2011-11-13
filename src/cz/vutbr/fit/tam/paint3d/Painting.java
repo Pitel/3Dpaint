@@ -11,7 +11,11 @@ public class Painting {
     private Context context;
     public Integer paintingId;
     public String name;
+    public String created;
     public PaintingPointSet paintingPointSet;
+
+    public static final String TABLE_NAME = "painting";
+    public static final String[] TABLE_COLUMNS = {"name", "created", "painting_id"};
 
     public Painting(Context context) {
         this.context = context;
@@ -22,6 +26,7 @@ public class Painting {
     public Painting loadFromCursor(Cursor c) {
         this.paintingId = c.getInt(c.getColumnIndex("painting_id"));
         this.name = c.getString(c.getColumnIndex("name"));
+        this.created = c.getString(c.getColumnIndex("created"));
 
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
         Cursor points = db.query("painting_point", new String[]{"x", "y", "z", "painting_point_id", "painting_id"}, "painting_id = ?", new String[]{this.paintingId.toString()}, null, null, "painting_point_id");
@@ -49,7 +54,8 @@ public class Painting {
         if (this.paintingId == 0) {
             values = new ContentValues();
             values.put("name", this.name);
-            this.paintingId = (int) db.insert("painting", null, values);
+            values.put("created", this.created);
+            this.paintingId = (int) db.insert(this.TABLE_NAME, null, values);
 
             
             for (PaintingPoint pp : this.paintingPointSet) {
@@ -79,11 +85,8 @@ public class Painting {
 
     public Painting getById(Integer paintingId) {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-        Log.d("Painting", "paintingId:" + paintingId);
-        Cursor c = db.query("painting", new String[]{"name", "painting_id"}, "painting_id = ?", new String[]{paintingId.toString()}, null, null, null);
+        Cursor c = db.query(Painting.TABLE_NAME, Painting.TABLE_COLUMNS, "painting_id = ?", new String[]{paintingId.toString()}, null, null, null);
         c.moveToFirst();
-        Log.d("Painting", "count:" + c.getCount());
-        Log.d("Painting", "name:" + c.getString(c.getColumnIndex("name")));
         if (c.getCount() > 0) {
             this.loadFromCursor(c);
         }

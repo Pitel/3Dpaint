@@ -8,4 +8,6 @@
         <string name="delete_confirm_title">Smazaní kresby</string>
         <string name="delete_confirm_yes">Ano</string>
         <string name="delete_confirm_no">Ne</string>
+
+        <string name="points">bodů</string>
 </resources>

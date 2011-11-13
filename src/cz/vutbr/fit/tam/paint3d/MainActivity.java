@@ -34,7 +34,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra("paintingId", (int) paintingId));
     }
 
-    public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, final long arg3) {
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, final long paintingId) {
         AlertDialog.Builder ad = new AlertDialog.Builder(this);
         ad.setMessage(getText(R.string.delete_confirm_msg).toString());
         ad.setIcon(android.R.drawable.ic_dialog_alert);
@@ -43,7 +43,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         ad.setPositiveButton(getText(R.string.delete_confirm_yes).toString(), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Painting p = new Painting(MainActivity.this);
-                p.getById((int) arg3);
+                p.getById((int) paintingId);
                 p.delete();
                 paintingSet.getAll();
                 ((PaintingListAdapter) getListAdapter()).notifyDataSetChanged();
