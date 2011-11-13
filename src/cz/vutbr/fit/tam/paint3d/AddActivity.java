@@ -66,7 +66,7 @@ public class AddActivity extends Activity implements SensorEventListener {
                         x += Math.round(event.values[0] * 100) / 100;
                         y += Math.round(event.values[1] * 100) / 100;
                         z += Math.round(event.values[2] * 100) / 100;
-                        this.painting.paintingPointList.add(new PaintingPoint(x, y, z));
+                        this.painting.paintingPointSet.add(new PaintingPoint(x, y, z));
                     }
                 }
                 break;
