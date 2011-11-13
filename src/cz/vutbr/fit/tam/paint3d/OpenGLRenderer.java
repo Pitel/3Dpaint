@@ -12,7 +12,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements Renderer {
 
-    public static final String TAG = "3Dpaint|GL";
+    public static final String TAG = "3Dpaint|OpenGLRenderer";
     public float angleX, angleY;
     public float vertices[];
     private FloatBuffer trail;

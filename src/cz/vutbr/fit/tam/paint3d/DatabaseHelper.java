@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 class DatabaseHelper extends SQLiteOpenHelper {
+    public static final String TAG = "3Dpaint|DatabaseHelper";
 
     private static final String DATABASE_NAME = "paint3d";
     private static final int DATABASE_VERSION = 1;

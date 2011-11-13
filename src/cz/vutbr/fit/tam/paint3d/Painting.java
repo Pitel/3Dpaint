@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Painting {
+    public static final String TAG = "3Dpaint|Painting";
     private Context context;
-
     public Integer paintingId;
     public String name;
     public List<PaintingPoint> paintingPointList;

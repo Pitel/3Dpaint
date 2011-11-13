@@ -1,6 +1,7 @@
 package cz.vutbr.fit.tam.paint3d;
 
 class PaintingPoint {
+    public static final String TAG = "3Dpaint|PaintingPoint";
     public Float x;
     public Float y;
     public Float z;

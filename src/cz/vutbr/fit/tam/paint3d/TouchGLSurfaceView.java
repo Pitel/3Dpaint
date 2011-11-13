@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 public class TouchGLSurfaceView extends GLSurfaceView {
+    public static final String TAG = "3Dpaint|TouchGLSurfaceView";
 
         public OpenGLRenderer renderer;
         private float prevX;

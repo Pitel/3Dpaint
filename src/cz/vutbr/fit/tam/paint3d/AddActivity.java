@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class AddActivity extends Activity implements SensorEventListener {
+    public static final String TAG = "3Dpaint|AddActivity";
     public ToggleButton button;
     private SensorManager mSensorManager;
     private Painting painting;

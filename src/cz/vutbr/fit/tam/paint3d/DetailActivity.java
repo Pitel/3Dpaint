@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 public class DetailActivity extends Activity {
 
-    public static final String TAG = "3Dpaint|ViewActivity";
+    public static final String TAG = "3Dpaint|DetailActivity";
     private TouchGLSurfaceView tGLSView;
     private Painting painting;
 
