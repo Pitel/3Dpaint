@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class AddActivity extends Activity implements SensorEventListener {
+
     public static final String TAG = "3Dpaint|AddActivity";
     public ToggleButton button;
     private SensorManager mSensorManager;
@@ -21,7 +22,7 @@ public class AddActivity extends Activity implements SensorEventListener {
     private Float x = new Float(0);
     private Float y = new Float(0);
     private Float z = new Float(0);
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +31,9 @@ public class AddActivity extends Activity implements SensorEventListener {
         button = (ToggleButton) findViewById(R.id.button);
         name = (EditText) findViewById(R.id.name);
 
-        
+
         button.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
                 if (name.getText().toString().trim().isEmpty()) {
                     Toast.makeText(AddActivity.this, "Vyplňte název kresby!", Toast.LENGTH_LONG).show();
@@ -58,13 +60,13 @@ public class AddActivity extends Activity implements SensorEventListener {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_LINEAR_ACCELERATION:
                 if (button.isChecked()) {
-                    if (x != (Math.round(event.values[0] * 100) / 100) ||
-                        y != (Math.round(event.values[1] * 100) / 100) ||
-                        z != (Math.round(event.values[2] * 100) / 100)) {
-                            x += Math.round(event.values[0] * 100) / 100;
-                            y += Math.round(event.values[1] * 100) / 100;
-                            z += Math.round(event.values[2] * 100) / 100;
-                            this.painting.paintingPointList.add(new PaintingPoint(x, y, z));
+                    if (x != (Math.round(event.values[0] * 100) / 100)
+                            || y != (Math.round(event.values[1] * 100) / 100)
+                            || z != (Math.round(event.values[2] * 100) / 100)) {
+                        x += Math.round(event.values[0] * 100) / 100;
+                        y += Math.round(event.values[1] * 100) / 100;
+                        z += Math.round(event.values[2] * 100) / 100;
+                        this.painting.paintingPointList.add(new PaintingPoint(x, y, z));
                     }
                 }
                 break;

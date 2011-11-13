@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String TAG = "3Dpaint|DatabaseHelper";
 
+    public static final String TAG = "3Dpaint|DatabaseHelper";
     private static final String DATABASE_NAME = "paint3d";
     private static final int DATABASE_VERSION = 1;
 
@@ -16,22 +16,18 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE painting (" +
-                       "painting_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                       "name VARCHAR NOT NULL COLLATE LOCALIZED)"
-                  );
-        db.execSQL("CREATE TABLE painting_point (" +
-                       "painting_point_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                       "painting_id INTEGER NOT NULL," +
-                       "x REAL NOT NULL," +
-                       "y REAL NOT NULL," +
-                       "z REAL NOT NULL)"
-                  );
+        db.execSQL("CREATE TABLE painting ("
+                + "painting_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                + "name VARCHAR NOT NULL COLLATE LOCALIZED)");
+        db.execSQL("CREATE TABLE painting_point ("
+                + "painting_point_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                + "painting_id INTEGER NOT NULL,"
+                + "x REAL NOT NULL,"
+                + "y REAL NOT NULL,"
+                + "z REAL NOT NULL)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
-
-
 }
