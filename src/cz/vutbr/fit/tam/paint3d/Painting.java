@@ -96,5 +96,6 @@ public class Painting {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
         db.delete(Painting.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
         db.delete(PaintingPoint.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
+        db.close();
     }
 }
