@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -65,12 +66,11 @@ public class AddActivity extends Activity implements SensorEventListener {
         switch (event.sensor.getType()) {
             case Sensor.TYPE_LINEAR_ACCELERATION:
                 if (button.isChecked()) {
-                    if (x != (Math.round(event.values[0] * 100) / 100)
-                            || y != (Math.round(event.values[1] * 100) / 100)
-                            || z != (Math.round(event.values[2] * 100) / 100)) {
-                        x += Math.round(event.values[0] * 100) / 100;
-                        y += Math.round(event.values[1] * 100) / 100;
-                        z += Math.round(event.values[2] * 100) / 100;
+                    if (Float.valueOf(Math.round(event.values[0])) != 0 || Float.valueOf(Math.round(event.values[1])) != 0 || Float.valueOf(Math.round(event.values[2])) != 0) {
+                        x += Float.valueOf(Math.round(event.values[0]));
+                        y += Float.valueOf(Math.round(event.values[1]));
+                        z += Float.valueOf(Math.round(event.values[2]));
+                        Log.d(TAG, "Coords: " + x + " " + y + " " + z);
                         this.painting.paintingPointSet.add(new PaintingPoint(x, y, z));
                     }
                 }
