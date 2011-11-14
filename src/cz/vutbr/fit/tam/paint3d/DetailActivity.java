@@ -14,9 +14,9 @@ public class DetailActivity extends Activity {
     public static final String TAG = "3Dpaint|DetailActivity";
     private TouchGLSurfaceView tGLSView;
     private Painting painting;
-    private TextView name;
     private TextView created;
     private TextView count;
+    private TextView title;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class DetailActivity extends Activity {
         painting.getById(getIntent().getExtras().getInt("paintingId"));
         tGLSView.renderer.vertices = painting.getVertices();
 
-        name = (TextView) findViewById(R.id.name);
-        name.setText(painting.name);
+        title = (TextView) findViewById(R.id.title);
+        title.setText(painting.name);
 
         created = (TextView) findViewById(R.id.created);
         created.setText(painting.created);
@@ -72,4 +72,8 @@ public class DetailActivity extends Activity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

@@ -34,12 +34,11 @@ public class AddActivity extends Activity implements SensorEventListener {
         button = (ToggleButton) findViewById(R.id.button);
         name = (EditText) findViewById(R.id.name);
 
-
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 if (name.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(AddActivity.this, "Vyplňte název kresby!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddActivity.this, AddActivity.this.getText(R.string.fill_painting_name), Toast.LENGTH_LONG).show();
                     button.setChecked(false);
                     return;
                 }

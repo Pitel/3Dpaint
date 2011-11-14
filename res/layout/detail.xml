@@ -7,9 +7,7 @@
     <LinearLayout style="@style/action_bar">
         <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_home"  android:onClick="goHome" />
         <View style="@style/action_bar_separator" />
-        <TextView style="@style/action_bar_title" />
-        <View style="@style/action_bar_separator" />
-        <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_add" android:onClick="goAdd"  />
+        <TextView style="@style/action_bar_title" android:id="@+id/title"/>
     </LinearLayout>
     <cz.vutbr.fit.tam.paint3d.TouchGLSurfaceView
         android:id="@+id/touch"
@@ -19,31 +17,21 @@
         />
     <LinearLayout style="@style/detail_footer">
         <TextView
-            android:id="@+id/name"
-            style="@style/listitem_normal_text"
+            android:id="@+id/count"
+            style="@style/listitem_small_text"
+            android:paddingRight="3dip"
             />
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:id="@+id/count"
-                style="@style/listitem_small_text"
-                android:paddingRight="3dip"
-                />
-            <TextView
-                android:text="@string/points"
-                style="@style/listitem_small_text"
-                />
-            <TextView
-                android:text=" | "
-                style="@style/listitem_small_text"
-                />
-            <TextView
-                style="@style/listitem_small_text"
-                android:id="@+id/created"
-                />
-        </LinearLayout>
+        <TextView
+            android:text="@string/points"
+            style="@style/listitem_small_text"
+            />
+        <TextView
+            android:text=" | "
+            style="@style/listitem_small_text"
+            />
+        <TextView
+            style="@style/listitem_small_text"
+            android:id="@+id/created"
+            />
     </LinearLayout>
 </LinearLayout>
