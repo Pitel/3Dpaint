@@ -5,9 +5,7 @@
     android:versionCode="1"
     android:versionName="1.0"
     >
-    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="10" />
-    <uses-feature android:name="android.hardware.sensor.accelerometer" />
-    <uses-feature android:name="android.hardware.sensor.compass" />
+    <uses-sdk android:minSdkVersion="10" />
     <application android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" android:icon="@drawable/ic_launcher_3dpaint">
         <activity android:name=".MainActivity" android:screenOrientation="nosensor">
             <intent-filter>
@@ -18,4 +16,4 @@
         <activity android:name=".AddActivity" />
         <activity android:name=".DetailActivity" />
     </application>
-</manifest> 
+</manifest>
