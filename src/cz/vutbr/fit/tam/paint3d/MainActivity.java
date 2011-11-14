@@ -12,7 +12,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     public static final String TAG = "3Dpaint|MainActivity";
     public PaintingSet paintingSet;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
         getListView().setOnItemClickListener(this);
         getListView().setOnItemLongClickListener(this);
-        
+
         paintingSet = new PaintingSet(this);
         paintingSet.getAll();
         setListAdapter(new PaintingListAdapter(this, paintingSet));
@@ -41,6 +41,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         ad.setTitle(getText(R.string.delete_confirm_title).toString());
         ad.setCancelable(true);
         ad.setPositiveButton(getText(R.string.delete_confirm_yes).toString(), new DialogInterface.OnClickListener() {
+
             public void onClick(DialogInterface dialog, int id) {
                 Painting p = new Painting(MainActivity.this);
                 p.getById((int) paintingId);
@@ -50,6 +51,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
             }
         });
         ad.setNegativeButton(getText(R.string.delete_confirm_no).toString(), new DialogInterface.OnClickListener() {
+
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }

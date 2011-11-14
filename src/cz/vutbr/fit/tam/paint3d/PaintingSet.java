@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 public class PaintingSet extends ArrayList<Painting> {
+
     public static final String TAG = "3Dpaint|PaintingSet";
     private Context context;
 
     public PaintingSet(Context context) {
         this.context = context;
     }
-
 
     public PaintingSet getAll() {
         this.clear();
