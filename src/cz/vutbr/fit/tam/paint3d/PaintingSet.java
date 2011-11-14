@@ -21,7 +21,7 @@ public class PaintingSet extends ArrayList<Painting> {
         if (c.getCount() > 0) {
             while (c.moveToNext()) {
                 Painting p = new Painting(this.context);
-                p.loadFromCursor(c);
+                p.loadFromCursor(c, false);
                 this.add(p);
             }
         }

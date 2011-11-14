@@ -38,7 +38,6 @@ public class PaintingListAdapter extends BaseAdapter {
             holder = new PaintingViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.created = (TextView) convertView.findViewById(R.id.created);
-            holder.count = (TextView) convertView.findViewById(R.id.count);
             convertView.setTag(holder);
         } else {
             holder = (PaintingViewHolder) convertView.getTag();
@@ -46,7 +45,6 @@ public class PaintingListAdapter extends BaseAdapter {
 
         holder.name.setText(this.getItem(i).name);
         holder.created.setText(this.getItem(i).created);
-        holder.count.setText(String.valueOf(this.getItem(i).paintingPointSet.size()));
 
         return convertView;
     }
@@ -55,6 +53,5 @@ public class PaintingListAdapter extends BaseAdapter {
 class PaintingViewHolder {
 
     TextView name;
-    TextView count;
     TextView created;
 }

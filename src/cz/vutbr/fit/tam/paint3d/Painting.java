@@ -22,24 +22,26 @@ public class Painting {
         this.paintingPointSet = new PaintingPointSet();
     }
 
-    public Painting loadFromCursor(Cursor c) {
+    public Painting loadFromCursor(Cursor c, Boolean withPoints) {
         this.paintingId = c.getInt(c.getColumnIndex("painting_id"));
         this.name = c.getString(c.getColumnIndex("name"));
         this.created = c.getString(c.getColumnIndex("created"));
 
-        SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-        Cursor points = db.query(PaintingPoint.TABLE_NAME, PaintingPoint.TABLE_COLUMNS, "painting_id = ?", new String[]{this.paintingId.toString()}, null, null, "painting_point_id");
-        if (points.getCount() > 0) {
-            while (points.moveToNext()) {
-                this.paintingPointSet.add(
-                        new PaintingPoint(
-                        Float.valueOf(points.getFloat(points.getColumnIndex("x"))),
-                        Float.valueOf(points.getFloat(points.getColumnIndex("y"))),
-                        Float.valueOf(points.getFloat(points.getColumnIndex("z")))));
+        if (withPoints) {
+            SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
+            Cursor points = db.query(PaintingPoint.TABLE_NAME, PaintingPoint.TABLE_COLUMNS, "painting_id = ?", new String[]{this.paintingId.toString()}, null, null, "painting_point_id");
+            if (points.getCount() > 0) {
+                while (points.moveToNext()) {
+                    this.paintingPointSet.add(
+                            new PaintingPoint(
+                            Float.valueOf(points.getFloat(points.getColumnIndex("x"))),
+                            Float.valueOf(points.getFloat(points.getColumnIndex("y"))),
+                            Float.valueOf(points.getFloat(points.getColumnIndex("z")))));
+                }
             }
+            points.close();
+            db.close();
         }
-        points.close();
-        db.close();
         return this;
     }
 
@@ -83,7 +85,7 @@ public class Painting {
         Cursor c = db.query(Painting.TABLE_NAME, Painting.TABLE_COLUMNS, "painting_id = ?", new String[]{paintingId.toString()}, null, null, null);
         c.moveToFirst();
         if (c.getCount() > 0) {
-            this.loadFromCursor(c);
+            this.loadFromCursor(c, true);
         }
         c.close();
         db.close();
