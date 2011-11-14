@@ -10,4 +10,6 @@
         <string name="delete_confirm_no">Ne</string>
 
         <string name="points">bodů</string>
+
+        <string name="no_painting">Zatím nemáte žádné kresby! Nové vytvoříte kliknutím na ⊕ vpravo nahoře.</string> 
 </resources>
