@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
     <LinearLayout style="@style/action_bar">
-        <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_home"  />
+        <ImageView style="@style/action_bar_action" android:src="@drawable/actionbar_home"  android:onClick="goHome" />
         <View style="@style/action_bar_separator" />
         <TextView style="@style/action_bar_title" />
         <View style="@style/action_bar_separator" />

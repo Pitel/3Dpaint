@@ -1,10 +1,12 @@
 package cz.vutbr.fit.tam.paint3d;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class DetailActivity extends Activity {
@@ -64,6 +66,10 @@ public class DetailActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void goHome(View view) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 }
