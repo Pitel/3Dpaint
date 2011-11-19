@@ -43,9 +43,7 @@ public class Painting {
 					new String[] { this.paintingId.toString() }, null, null, "painting_point_id");
 			if (points.getCount() > 0) {
 				while (points.moveToNext()) {
-					this.paintingPointSet.add(new PaintingPoint(Float.valueOf(points.getFloat(points
-							.getColumnIndex("x"))), Float.valueOf(points.getFloat(points.getColumnIndex("y"))), Float
-							.valueOf(points.getFloat(points.getColumnIndex("z")))));
+					this.paintingPointSet.add(new PaintingPoint(points.getInt(points.getColumnIndex("x")), points.getInt(points.getColumnIndex("y")), points.getInt(points.getColumnIndex("z"))));
 				}
 			}
 			points.close();
@@ -65,9 +63,9 @@ public class Painting {
 
 			for (PaintingPoint pp : this.paintingPointSet) {
 				values = new ContentValues();
-				values.put("x", pp.x.floatValue());
-				values.put("y", pp.y.floatValue());
-				values.put("z", pp.z.floatValue());
+				values.put("x", pp.x);
+				values.put("y", pp.y);
+				values.put("z", pp.z);
 				values.put("painting_id", this.paintingId);
 				db.insert(PaintingPoint.TABLE_NAME, null, values);
 			}
@@ -80,9 +78,9 @@ public class Painting {
 		float[] result = new float[this.paintingPointSet.size() * 3];
 		int i = 0;
 		for (PaintingPoint pp : this.paintingPointSet) {
-			result[i] = pp.x.floatValue();
-			result[i + 1] = pp.y.floatValue();
-			result[i + 2] = pp.z.floatValue();
+			result[i] = pp.x;
+			result[i + 1] = pp.y;
+			result[i + 2] = pp.z;
 			i = i + 3;
 		}
 		return result;
