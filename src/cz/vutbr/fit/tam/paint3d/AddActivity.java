@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,9 +25,12 @@ public class AddActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Painting painting;
     private EditText name;
-    private Float x = new Float(0);
-    private Float y = new Float(0);
-    private Float z = new Float(0);
+    private int vx = 0;
+    private int vy = 0;
+    private int vz = 0;
+    private int x = 0;
+    private int y = 0;
+    private int z = 0;
     private ProgressDialog pd;
     private Boolean isSaving = false;
 
@@ -53,9 +57,12 @@ public class AddActivity extends Activity implements SensorEventListener {
                     return;
                 }
                 if (button.isChecked()) {
-                    x = new Float(0);
-                    y = new Float(0);
-                    z = new Float(0);
+                    vx = 0;
+                    vy = 0;
+                    vz = 0;
+                    x = 0;
+                    y = 0;
+                    z = 0;
                     painting = new Painting(AddActivity.this);
                 } else {
                     if (!isSaving) {
@@ -74,10 +81,19 @@ public class AddActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (button.isChecked() && event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
-            x += Float.valueOf(Math.round(event.values[0]));
-            y += Float.valueOf(Math.round(event.values[1]));
-            z += Float.valueOf(Math.round(event.values[2]));
-            this.painting.paintingPointSet.add(new PaintingPoint(x, y, z));
+            vx += Math.round(event.values[0]);
+            vy += Math.round(event.values[1]);
+            vz += Math.round(event.values[2]);
+            
+            x += vx;
+            y += vy;
+            z += vz;
+            
+            Log.v(TAG, event.timestamp + ": " + event.values[0] + ", " + event.values[1] + ", " + event.values[2] + " -> " + vx + ", " + vy + ", " + vz + " -> " + x + ", " + y + ", " + z);
+            
+            if (vx != 0 || vy != 0 || vz != 0) {
+                painting.paintingPointSet.add(new PaintingPoint(x, y, z));
+            }
         }
     }
 
