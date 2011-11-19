@@ -92,10 +92,18 @@ public class Painting {
         return this;
     }
 
-    void delete() {
+    public void delete() {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
         db.delete(Painting.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
         db.delete(PaintingPoint.TABLE_NAME, "painting_id = ?", new String[]{this.paintingId.toString()});
         db.close();
+    }
+
+    public void exportToA() {
+        // tady si pripravim format dat, udelam si nejaky StringWriter nebo tak.
+        FileExporter fe = new FileExporter();
+        fe.setFilename(this.name);
+        fe.setData("Data");
+        fe.export();
     }
 }
