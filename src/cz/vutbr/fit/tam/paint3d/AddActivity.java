@@ -71,23 +71,17 @@ public class AddActivity extends Activity implements SensorEventListener {
         });
     }
 
+    @Override
     public void onSensorChanged(SensorEvent event) {
-        switch (event.sensor.getType()) {
-            case Sensor.TYPE_LINEAR_ACCELERATION:
-                if (button.isChecked()) {
-                    if (Float.valueOf(Math.round(event.values[0])) != 0 || Float.valueOf(Math.round(event.values[1])) != 0 || Float.valueOf(Math.round(event.values[2])) != 0) {
-                        x += Float.valueOf(Math.round(event.values[0]));
-                        y += Float.valueOf(Math.round(event.values[1]));
-                        z += Float.valueOf(Math.round(event.values[2]));
-                        this.painting.paintingPointSet.add(new PaintingPoint(x, y, z));
-                    }
-                }
-                break;
-            default:
-                break;
+        if (button.isChecked() && event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
+            x += Float.valueOf(Math.round(event.values[0]));
+            y += Float.valueOf(Math.round(event.values[1]));
+            z += Float.valueOf(Math.round(event.values[2]));
+            this.painting.paintingPointSet.add(new PaintingPoint(x, y, z));
         }
     }
 
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
