@@ -111,7 +111,7 @@ public class Painting {
 	public void exportToObj() {
 		// tady si pripravim format dat, udelam si nejaky StringWriter nebo tak.
 		FileExporter fe = new FileExporter();
-		fe.setFilename(this.name);
+		fe.setFilename(this.name + ".obj");
 		String data = "";
 		for (int i = 0; i < paintingPointSet.size(); i++) {
 			PaintingPoint point = paintingPointSet.get(i);
@@ -124,7 +124,7 @@ public class Painting {
 	public void exportToCollada() {
 		// tady si pripravim format dat, udelam si nejaky StringWriter nebo tak.
 		FileExporter fe = new FileExporter();
-		fe.setFilename(this.name);
+		fe.setFilename(this.name + ".dae");
 		String data = "";
 		String author = "user";
 		
