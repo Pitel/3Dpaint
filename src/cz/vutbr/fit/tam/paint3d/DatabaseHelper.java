@@ -23,9 +23,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE painting_point ("
                 + "painting_point_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                 + "painting_id INTEGER NOT NULL,"
-                + "x REAL NOT NULL,"
-                + "y REAL NOT NULL,"
-                + "z REAL NOT NULL)");
+                + "x INTEGER NOT NULL,"
+                + "y INTEGER NOT NULL,"
+                + "z INTEGER NOT NULL)");
     }
 
     @Override
