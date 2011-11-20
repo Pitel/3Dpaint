@@ -1,7 +1,7 @@
 package cz.vutbr.fit.tam.paint3d;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import android.os.Environment;
@@ -54,9 +54,9 @@ public class FileExporter {
 						f.createNewFile();
 					}
 					// File f = new File(root, filename);
-					// FileWriter writer = new FileWriter(f);
-					FileOutputStream writer = new FileOutputStream(f);
-					writer.write(data.getBytes());
+					FileWriter writer = new FileWriter(f);
+					//FileOutputStream writer = new FileOutputStream(f);
+					writer.write(data);
 					writer.flush();
 					writer.close();
 				} else {

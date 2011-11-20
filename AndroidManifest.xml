@@ -16,4 +16,5 @@
         <activity android:name=".AddActivity" android:screenOrientation="nosensor"/>
         <activity android:name=".DetailActivity" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

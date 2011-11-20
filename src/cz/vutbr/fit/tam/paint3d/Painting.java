@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class Painting {
 
@@ -43,7 +44,8 @@ public class Painting {
 					new String[] { this.paintingId.toString() }, null, null, "painting_point_id");
 			if (points.getCount() > 0) {
 				while (points.moveToNext()) {
-					this.paintingPointSet.add(new PaintingPoint(points.getInt(points.getColumnIndex("x")), points.getInt(points.getColumnIndex("y")), points.getInt(points.getColumnIndex("z"))));
+					this.paintingPointSet.add(new PaintingPoint(points.getInt(points.getColumnIndex("x")), points
+							.getInt(points.getColumnIndex("y")), points.getInt(points.getColumnIndex("z"))));
 				}
 			}
 			points.close();
@@ -111,12 +113,18 @@ public class Painting {
 		FileExporter fe = new FileExporter();
 		fe.setFilename(this.name + ".obj");
 		String data = "";
+		String f = "l ";
+		Log.i(TAG, "Vlozenie dat");
 		for (int i = 0; i < paintingPointSet.size(); i++) {
 			PaintingPoint point = paintingPointSet.get(i);
-			data.concat("v " + point.x + " " + point.y + " " + point.z + "\n");
+			data = data.concat("v " + point.x + " " + point.y + " " + point.z + "\n");
+			int j = i + 1;
+			f = f.concat(j + " ");
 		}
+		data = data.concat(f + "\n");
 		fe.setData(data);
 		fe.export();
+		Log.i(TAG, "Data: " + data);
 	}
 
 	public void exportToCollada() {
@@ -125,30 +133,41 @@ public class Painting {
 		fe.setFilename(this.name + ".dae");
 		String data = "";
 		String author = "user";
-		
-		//2011-11-19T16:55:22
-		Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timestamp = df.format(c.getTime());
-        timestamp.replace(" ", "T");
 
-		data.concat("<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-				+ "<COLLADA xmlns=\"http://www.collada.org/2005/11/COLLADASchema\" version=\"1.4.1\">"
-				+ "<asset><contributor><author>" + author
-				+ "</author><authoring_tool>3Dpaint</authoring_tool></contributor><created>" + timestamp
-				+ "</created><modified>" + timestamp
-				+ "</modified><unit name=\"meter\" meter=\"1\"/><up_axis>Z_UP</up_axis></asset>"
-				+ "<library_geometries><geometry id=\"Plane-mesh\"><mesh><source id=\"Plane-mesh-positions\">"
-				+ "<float_array id=\"Plane-mesh-positions-array\" count=\"" + paintingPointSet.size() + "\">");
+		// 2011-11-19T16:55:22
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String timestamp = df.format(c.getTime());
+		timestamp = timestamp.replace(" ", "T");
+
+		data = data
+				.concat("<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+						+ "<COLLADA xmlns=\"http://www.collada.org/2005/11/COLLADASchema\" version=\"1.4.1\">"
+						+ "<asset><contributor><author>"
+						+ author
+						+ "</author><authoring_tool>3Dpaint</authoring_tool></contributor><created>"
+						+ timestamp
+						+ "</created><modified>"
+						+ timestamp
+						+ "</modified><unit name=\"meter\" meter=\"1\"/><up_axis>Z_UP</up_axis></asset>"
+						+ "<library_cameras><camera id=\"Camera-camera\" name=\"Camera\"><optics><technique_common><perspective>"
+						+ "<xfov sid=\"xfov\">60.00003</xfov><aspect_ratio>1.777778</aspect_ratio>"
+						+ "<znear sid=\"znear\">0.1</znear><zfar sid=\"zfar\">32</zfar></perspective>"
+						+ "</technique_common></optics></camera>"
+						+ "</library_cameras><library_geometries><geometry id=\"Plane-mesh\"><mesh>"
+						+ "<source id=\"Plane-mesh-positions\">"
+						+ "<float_array id=\"Plane-mesh-positions-array\" count=\"" + paintingPointSet.size() + "\">");
 
 		for (int i = 0; i < paintingPointSet.size(); i++) {
 			PaintingPoint point = paintingPointSet.get(i);
-			data.concat(point.x + " " + point.y + " " + point.z + " ");
+			data = data.concat(point.x + " " + point.y + " " + point.z + " ");
 		}
 
-		data
+		data = data
 				.concat("</float_array><technique_common>"
-						+ "<accessor source=\"#Plane-mesh-positions-array\" count=\"48\" stride=\"3\">"
+						+ "<accessor source=\"#Plane-mesh-positions-array\" count=\""
+						+ paintingPointSet.size() / 3
+						+ "\" stride=\"3\">"
 						+ "<param name=\"X\" type=\"float\"/><param name=\"Y\" type=\"float\"/>"
 						+ "<param name=\"Z\" type=\"float\"/></accessor></technique_common></source>"
 						+ "<source id=\"Plane-mesh-normals\"><float_array id=\"Plane-mesh-normals-array\" count=\"0\"/>"
