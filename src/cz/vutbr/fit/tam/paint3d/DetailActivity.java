@@ -61,10 +61,12 @@ public class DetailActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.obj:
-                Toast.makeText(this, "Not implemented!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Not implemented!", Toast.LENGTH_LONG).show();
+            	painting.exportToObj();
                 return true;
             case R.id.collada:
-                Toast.makeText(this, "Not implemented!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Not implemented!", Toast.LENGTH_LONG).show();
+            	painting.exportToCollada();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

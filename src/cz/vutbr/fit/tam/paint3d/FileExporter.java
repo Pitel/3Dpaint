@@ -1,12 +1,15 @@
 package cz.vutbr.fit.tam.paint3d;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.os.Environment;
+import android.util.Log;
 
 public class FileExporter {
+	public static final String TAG = "3Dpaint|FileExporter";
+
 	private String filename;
 
 	private String data;
@@ -38,17 +41,27 @@ public class FileExporter {
 			mExternalStorageAvailable = mExternalStorageWriteable = false;
 		}
 
+		Log.i(TAG, "mExternalStorageAvailable: " + mExternalStorageAvailable + ", mExternalStorageWriteable: "
+				+ mExternalStorageWriteable);
 		if ((mExternalStorageAvailable == true) && (mExternalStorageWriteable == true)) {
 			try {
-				File root = new File(Environment.getExternalStorageDirectory(), filename);
-				if (!root.exists()) {
-					root.mkdirs();
+				// Environment.getDataDirectory();
+				File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+				root.mkdirs();
+				if (root.exists()) {
+					File f = new File(root, filename);
+					if (!f.exists()) {
+						f.createNewFile();
+					}
+					// File f = new File(root, filename);
+					// FileWriter writer = new FileWriter(f);
+					FileOutputStream writer = new FileOutputStream(f);
+					writer.write(data.getBytes());
+					writer.flush();
+					writer.close();
+				} else {
+					Log.e(TAG, "Folder doesn't exist and I failed at creating it.");
 				}
-				File f = new File(root, filename);
-				FileWriter writer = new FileWriter(f);
-				writer.append(data);
-				writer.flush();
-				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
