@@ -5,8 +5,6 @@
     <string name="collada">Export do Collada</string>
     <string name="delete_confirm_msg">Opravdu chcete smazat tuto kresbu?</string>
     <string name="delete_confirm_title">Smazaní kresby</string>
-    <string name="delete_confirm_yes">Ano</string>
-    <string name="delete_confirm_no">Ne</string>
     <string name="no_painting">Zatím nemáte žádné kresby! Nové vytvoříte kliknutím na ⊕ vpravo nahoře.</string>
     <string name="add_painting">Přidat kresbu</string>
     <string name="fill_painting_name">Vyplňte prosím název kresby!</string>

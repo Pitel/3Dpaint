@@ -36,11 +36,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, final long paintingId) {
         AlertDialog.Builder ad = new AlertDialog.Builder(this);
-        ad.setMessage(getText(R.string.delete_confirm_msg).toString());
+        ad.setMessage(R.string.delete_confirm_msg);
         ad.setIcon(android.R.drawable.ic_dialog_alert);
-        ad.setTitle(getText(R.string.delete_confirm_title).toString());
+        ad.setTitle(R.string.delete_confirm_title);
         ad.setCancelable(true);
-        ad.setPositiveButton(getText(R.string.delete_confirm_yes).toString(), new DialogInterface.OnClickListener() {
+        ad.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
                 Painting p = new Painting(MainActivity.this);
@@ -50,7 +50,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
                 ((PaintingListAdapter) getListAdapter()).notifyDataSetChanged();
             }
         });
-        ad.setNegativeButton(getText(R.string.delete_confirm_no).toString(), new DialogInterface.OnClickListener() {
+        ad.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
