@@ -19,11 +19,6 @@
         <TextView
             android:id="@+id/count"
             style="@style/listitem_small_text"
-            android:paddingRight="3dip"
-            />
-        <TextView
-            android:text="@string/points"
-            style="@style/listitem_small_text"
             />
         <TextView
             android:text=" | "

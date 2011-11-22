@@ -35,7 +35,7 @@ public class DetailActivity extends Activity {
         created.setText(painting.created);
 
         count = (TextView) findViewById(R.id.count);
-        count.setText(String.valueOf(painting.paintingPointSet.size()));
+        count.setText(getResources().getQuantityString(R.plurals.points, painting.paintingPointSet.size(), painting.paintingPointSet.size()));
     }
 
     @Override
