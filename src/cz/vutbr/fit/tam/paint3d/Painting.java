@@ -44,8 +44,11 @@ public class Painting {
 					new String[] { this.paintingId.toString() }, null, null, "painting_point_id");
 			if (points.getCount() > 0) {
 				while (points.moveToNext()) {
-					this.paintingPointSet.add(new PaintingPoint(points.getInt(points.getColumnIndex("x")), points
-							.getInt(points.getColumnIndex("y")), points.getInt(points.getColumnIndex("z"))));
+					this.paintingPointSet.add(new PaintingPoint(
+						points.getFloat(points.getColumnIndex("x")),
+						points.getFloat(points.getColumnIndex("y")),
+						points.getFloat(points.getColumnIndex("z"))
+					));
 				}
 			}
 			points.close();

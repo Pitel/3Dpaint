@@ -25,12 +25,12 @@ public class AddActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Painting painting;
     private EditText name;
-    private int vx = 0;
-    private int vy = 0;
-    private int vz = 0;
-    private int x = 0;
-    private int y = 0;
-    private int z = 0;
+    private float vx = 0;
+    private float vy = 0;
+    private float vz = 0;
+    private float x = 0;
+    private float y = 0;
+    private float z = 0;
     private ProgressDialog pd;
     private Boolean isSaving = false;
 
@@ -81,9 +81,9 @@ public class AddActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (button.isChecked() && event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
-            vx += Math.round(event.values[0]);
-            vy += Math.round(event.values[1]);
-            vz += Math.round(event.values[2]);
+            vx += event.values[0];
+            vy += event.values[1];
+            vz += event.values[2];
             
             x += vx;
             y += vy;
