@@ -10,23 +10,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class Painting {
-
 	public static final String TAG = "3Dpaint|Painting";
-
 	public static final String TABLE_NAME = "painting";
-
 	public static final String[] TABLE_COLUMNS = { "name", "created", "painting_id" };
-
 	private Context context;
-
 	public Integer paintingId;
-
 	public String name;
-
 	public String created;
-
 	public PaintingPointSet paintingPointSet;
-
+	
 	public Painting(Context context) {
 		this.context = context;
 		this.paintingId = 0;

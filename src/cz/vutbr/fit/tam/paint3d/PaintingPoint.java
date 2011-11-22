@@ -14,4 +14,16 @@ class PaintingPoint {
         this.y = y;
         this.z = z;
     }
+    
+    public void add(PaintingPoint p) {
+        this.x += p.x;
+        this.y += p.y;
+        this.z += p.z;
+    }
+    
+    public void sub(PaintingPoint p) {
+        this.x -= p.x;
+        this.y -= p.y;
+        this.z -= p.z;
+    }
 }

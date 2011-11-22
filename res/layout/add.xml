@@ -33,5 +33,6 @@
         android:textSize="35dip"
         android:background="@color/just_black"
         android:textColor="@color/just_white"
+        android:onClick="startPaint"
         />
 </LinearLayout>
