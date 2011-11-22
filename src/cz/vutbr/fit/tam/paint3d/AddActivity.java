@@ -34,10 +34,8 @@ public class AddActivity extends Activity implements SensorEventListener {
         name = (EditText) findViewById(R.id.name);
 
         pd = new ProgressDialog(this);
-        pd.setIndeterminate(true);
-        pd.setIcon(android.R.drawable.ic_dialog_info);
-        pd.setTitle(getText(R.string.painting_save_title));
-        pd.setMessage(getText(R.string.painting_save_msg));
+        pd.setMessage(getString(R.string.painting_save));
+        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
     }
 
     public void startPaint(View v) {
@@ -82,10 +80,11 @@ public class AddActivity extends Activity implements SensorEventListener {
         super.onStop();
     }
 
-    private class PaintingSaveAsyncTask extends AsyncTask<Void, Void, Boolean> {
+    private class PaintingSaveAsyncTask extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
         protected void onPreExecute() {
+            pd.setMax(painting.paintingPointSet.size());
             pd.show();
         }
 
@@ -113,17 +112,24 @@ public class AddActivity extends Activity implements SensorEventListener {
                 Log.v(TAG, i + ": " + a.x + ", " + a.y + ", " + a.z + " -> " + v.x + ", " + v.y + ", " + v.z + " -> " + x.x + ", " + x.y + ", " + x.z);
                 
                 painting.paintingPointSet.set(i, x);
+                publishProgress(i);
             }
             
             try {
                 painting.save();
             } catch (Exception e) {
+                Log.w(TAG, e);
                 return false;
             }
             
             return true;
         }
-
+        
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            pd.setProgress(progress[0]);
+        }
+        
         @Override
         protected void onPostExecute(Boolean result) {
             pd.dismiss();

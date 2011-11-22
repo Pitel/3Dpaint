@@ -3,7 +3,7 @@
     <string name="app_name">3Dpaint</string>
     <string name="obj">Export do OBJ</string>
     <string name="collada">Export do Collada</string>
-    <string name="delete_confirm_msg">Opravdu chcete smazat tuto kresbu?</string>
+    <string name="delete_confirm_msg">Zmazat tuto kresbu?</string>
     <string name="delete_confirm_title">Smazaní kresby</string>
     <string name="no_painting">Zatím nemáte žádné kresby! Nové vytvoříte kliknutím na ⊕ vpravo nahoře.</string>
     <string name="add_painting">Přidat kresbu</string>
@@ -11,8 +11,7 @@
     <string name="start_painting">Dotykem obrazovky začnete kreslit</string>
     <string name="stop_painting">Pro ukončení kresby se opět dotkněte obrazovky</string>
     <string name="painting_name">Název kresby</string>
-    <string name="painting_save_title">Ukládání kresby</string>
-    <string name="painting_save_msg">Prosím čekejte, kresba se ukládá…</string>
+    <string name="painting_save">Zpracování a&#xa0;ukládání kresby…</string>
     <plurals name="points">
         <item quantity="one">%d bod</item>
         <item quantity="few">%d body</item>
