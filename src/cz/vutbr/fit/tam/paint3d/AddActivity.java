@@ -112,7 +112,7 @@ public class AddActivity extends Activity implements SensorEventListener {
                 Log.v(TAG, i + ": " + a.x + ", " + a.y + ", " + a.z + " -> " + v.x + ", " + v.y + ", " + v.z + " -> " + x.x + ", " + x.y + ", " + x.z);
                 
                 painting.paintingPointSet.set(i, x);
-                publishProgress(i);
+                publishProgress(i + 1);
             }
             
             try {
