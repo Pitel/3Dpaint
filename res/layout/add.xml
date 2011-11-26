@@ -9,19 +9,13 @@
         <View style="@style/action_bar_separator" />
         <TextView style="@style/action_bar_title" android:text="@string/add_painting" />
     </LinearLayout>
-    <LinearLayout
+    <EditText
+        android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dip"
-        >
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/painting_name"
-            />
-    </LinearLayout>
+        android:singleLine="true"
+        android:hint="@string/painting_name"
+        />
     <ToggleButton
         android:id="@+id/button"
         android:layout_width="fill_parent"
