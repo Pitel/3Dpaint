@@ -98,7 +98,7 @@ public class AddActivity extends Activity implements SensorEventListener {
             avg.x /= painting.paintingPointSet.size();
             avg.y /= painting.paintingPointSet.size();
             avg.z /= painting.paintingPointSet.size();
-            Log.d(TAG, "avg = " + avg.x + ", " + avg.y + ", " + avg.z);
+            Log.d(TAG, "avg = " + avg.toString());
             
             //Odecteni prumeru a integrace
             PaintingPoint v = new PaintingPoint(0, 0, 0);	//Rychlost
@@ -109,9 +109,9 @@ public class AddActivity extends Activity implements SensorEventListener {
                 a.sub(avg);	//Odecteme prumer
                 v.add(a);	//Zintegrujeme zrychleni na rychlost
                 x.add(v);	//Zintegrujeme rychlost na polohu
-                Log.v(TAG, i + ": " + a.x + ", " + a.y + ", " + a.z + " -> " + v.x + ", " + v.y + ", " + v.z + " -> " + x.x + ", " + x.y + ", " + x.z);
+                Log.v(TAG, i + ": " + a.toString() + " -> " + v.toString() + " -> " + x.toString());
                 
-                painting.paintingPointSet.set(i, x);
+                painting.paintingPointSet.set(i, new PaintingPoint(x.x, x.y, x.z));
                 publishProgress(i + 1);
             }
             

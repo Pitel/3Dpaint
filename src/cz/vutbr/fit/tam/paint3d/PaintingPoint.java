@@ -26,4 +26,9 @@ class PaintingPoint {
         this.y -= p.y;
         this.z -= p.z;
     }
+
+    @Override
+    public String toString() {
+        return "x: " + this.x + " y: " + this.y + " z: " + this.z;
+    }
 }
